@@ -1,0 +1,10 @@
+*.pyc
+*.log
+*.sqlite
+.DS_Store
+local_settings.py
+venv
+static/.sass-cache/
+.env
+heroku_config.sh
+

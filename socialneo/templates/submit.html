@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="large-12 columns">
+        <h1>Submit Report</h1>
+        <h3>{{message}}</h3>
+        <form action="/submit/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="large-6 columns">
+                <label for="id_name">Name:</label>
+                <input type="text" name="name" id="id_right_ascension" />
+            </div>
+            <div class="large-6 columns">
+                <label for="id_discovery_date">Discovery Date:</label>
+                <input type="date" name="discovery_date" id="id_discovery_date" maxlength="100" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="large-6 columns">
+                <label for="id_right_ascension">Right Ascension (hh mm.ss):</label>
+                <input type="text" name="right_ascension" id="id_right_ascension" />
+            </div>
+            <div class="large-6 columns">
+                <label for="id_declination">Declination (hh mm.ss):</label>
+                <input type="text" name="declination" id="id_declination" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="large-4 columns">
+                <label for="id_magnitude">Magnitude:</label>
+                <input type="text" name="magnitude" id="id_magnitude" />
+            </div>
+            <div class="large-4 columns">
+                <label for="id_arc">Arc:</label>
+                <input type="text" name="arc" id="id_arc" />
+            </div>
+            <div class="large-4 columns">
+                <label for="id_nominal_h">Nominal H:</label>
+                <input type="text" name="nominal_h" id="id_norminal_h" />
+            </div>
+        </div>
+
+
+        <p>
+            <label for="id_media">Upload image:</label>
+            <input type="file" name="media" id="id_media" />
+        </p>
+        <input type="submit" class="button success" value="Submit" />
+        </form>
+    </div>
+</div>
+
+{% endblock %}

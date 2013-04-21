@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block og %}
+<meta property="fb:app_id" content="{{ settings.FB_APP_ID }}" /> 
+<meta property="og:type" content="{{ settings.FB_NAMESPACE }}:near_earth_object" /> 
+<meta property="og:url" content="http://{{ r.META.HTTP_HOST }}/neo/{{ neo.id }}"/>
+<meta property="og:image" content="{{ neo_image }}"/>
+<meta property="og:title" content="{{ neo.name }}"/>
+<meta property="socialneo:right_ascension" content='{{ neo.right_ascension_hours|floatformat:"0" }} {{ neo.right_ascension_minutes|floatformat:"0" }}.{{ neo.right_ascension_seconds|floatformat:"0" }}'/>
+<meta property="socialneo:declination" content='{{ neo.declination_hours|floatformat:"0" }} {{ neo.declination_minutes|floatformat:"0" }}.{{ neo.declination_seconds|floatformat:"0" }}'/>
+<meta property="socialneo:magnitude" content="{{ neo.magnitude }}"/>
+<meta property="socialneo:arc" content="{{ neo.arc }}"/>
+<meta property="socialneo:nominal_h" content="{{ neo.nominal_h }}"/>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <h1>{{ neo.name }}</h1>
+
+    <h3>Submitted By <a href="/profile/{{ neo.discovered_by.username }}">{{ neo.discovered_by.first_name }} {{ neo.discovered_by.last_name }} <img src="http://graph.facebook.com/{{neo.discovered_by.username}}/picture?type=large" style="max-height:50px"></a></h3>
+    <h5>Discovery Date: {{ neo.discovery_date }}</h5>
+</div>
+
+<div class="row">
+    <div class="large-4 columns">
+        <img src="{{ neo.media.url }}">
+        {% if user.is_authenticated %}
+            <a href="/neo/{{ neo.id }}/observe" class="button small">Observe This!</a>
+        {% endif %}
+    </div>
+
+    <div class="large-4 columns">
+        <p><strong>Right Ascension:</strong> {{ neo.right_ascension_hours|floatformat:"0" }} {{ neo.right_ascension_minutes|floatformat:"0" }}.{{ neo.right_ascension_seconds|floatformat:"0" }}</p>
+        <p><strong>Declination Hours:</strong> {{ neo.declination_hours|floatformat:"0" }} {{ neo.declination_minutes|floatformat:"0" }}.{{ neo.declination_seconds|floatformat:"0" }}</p>
+    </div>
+
+    <div class="large-4 columns">
+        <p><strong>Magnitude:</strong> {{ neo.magnitude }}</p>
+        <p><strong>Arc:</strong> {{ neo.arc }}</p>
+        <p><strong>Nominal H:</strong> {{ neo.nominal_h }}</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-12 columns">
+        <h3>Observations</h3>
+        <ul>
+        {% for observation in neo.observation_set.all %}
+        <li><a href="/profile/{{observation.observer.username}}"><img src="http://graph.facebook.com/{{observation.observer.username}}/picture?type=large" style="max-height:50px">{{ observation.observer.first_name }} {{ observation.observer.last_name }}</a> - {{ observation.observation_date }}</li>
+        {% endfor%}
+        </ul>
+    </div>
+</div>
+
+
+{% endblock %}

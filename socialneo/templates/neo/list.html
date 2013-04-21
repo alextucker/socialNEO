@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="row">
+    <h1>Near Earth Objects</h1>
+</div>
+
+<div class="row">
+    
+    
+    <div class="large-6 columns">
+        <h3>Trending</h3>
+        {% for neo in trending %}
+            <div class="row">
+                <div class="small-3 columns">
+                    <a href="/neo/{{ neo.id }}"><img src="{{ neo.media.url }}"></a>
+                </div>
+                <div class="small-9 columns">
+                    <strong><a href="/neo/{{ neo.id }}">{{ neo.name }}</a></strong>
+                    <br />Discovered: {{ neo.discovery_date }}
+                    <br />Observations: {{ neo.observation_set.all.count}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-9 columns">
+                    <br />
+                    Discovered by:
+                    <br /><a href="/profile/{{ neo.discovered_by.username }}">{{ neo.discovered_by.first_name }} {{ neo.discovered_by.last_name }}</a>
+                </div>
+                <div class="small-3 columns">
+                    <a href="/profile/{{ neo.discovered_by.username }}"><img src="http://graph.facebook.com/{{neo.discovered_by.username}}/picture?type=large" style="max-height:50px"></a>
+                </div>
+            </div>
+            <hr />
+        {% endfor %}
+    </div>
+
+    <div class="large-1 columns"></div>
+
+    <div class="large-4 columns">
+        <h3>Recently Reported</h3>
+        <div class="row">
+            <div class="small-4 columns">
+
+            </div>
+            <div class="small-8 columns">
+
+            </div>
+        </div>
+        {% for neo in neos %}
+            <div class="row">
+                <div class="small-4 columns">
+                    <a href="/neo/{{ neo.id }}"><img src="{{ neo.media.url }}"></a>
+                </div>
+                <div class="small-8 columns">
+                    <strong><a href="/neo/{{ neo.id }}">{{ neo.name }}</a></strong>
+                    <br />Discovered: {{ neo.discovery_date }}
+                    <br />Observations: {{ neo.observation_set.all.count}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-8 columns">
+                    <br />
+                    Discovered by:
+                    <br /><a href="/profile/{{ neo.discovered_by.username }}">{{ neo.discovered_by.first_name }} {{ neo.discovered_by.last_name }}</a>
+                </div>
+                <div class="small-4 columns">
+                    <a href="/profile/{{ neo.discovered_by.username }}"><img src="http://graph.facebook.com/{{neo.discovered_by.username}}/picture?type=large" style="max-height:50px"></a>
+                </div>
+            </div>
+            <hr />
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="row">
+    <h1>{{profile_user.first_name}} {{profile_user.last_name}}</h1>
+</div>
+
+<div class="row">
+    <div class="large-3 columns">
+        <img src="http://graph.facebook.com/{{profile_user.username}}/picture?type=large">
+    </div>
+
+    <div class="large-7 columns">
+        <h3>Reported NEOs</h3>
+        {% for neo in neos %}
+            <div class="row">
+                <div class="small-3 columns">
+                    <a href="/neo/{{ neo.id }}"><img src="{{ neo.media.url }}"></a>
+                </div>
+                <div class="small-9 columns">
+                    <strong><a href="/neo/{{ neo.id }}">{{ neo.name }}</a></strong>
+                    <br />Discovered: {{ neo.discovery_date }}
+                    <br />Observations: {{ neo.observation_set.all.count}}
+                </div>
+            </div>
+            <hr />
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
