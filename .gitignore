@@ -7,4 +7,5 @@ venv
 static/.sass-cache/
 .env
 heroku_config.sh
+reset_db_heroku.sh
 
