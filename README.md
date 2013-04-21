@@ -1,5 +1,5 @@
-Better Django Bootstrap
-=======================
+Social NEO
+===========
 
 Starting a new Django project can be a pain. Gotta get static files working, gotta 
 get stuff ready for test deploys. 
@@ -10,7 +10,7 @@ Setup
 1. Set a new `SECRET_KEY` in `project/settings.py` (TODO: Create a new manage.py command to automate this)
 2. Edit the Database settings in `.env` to best suit your needs
 
-Create a '.env' file that will contain your settings and credentials like this:
+Create a `.env` file that will contain your settings and credentials like this:
 
 ```bash
 DEPLOY='LOCAL'
